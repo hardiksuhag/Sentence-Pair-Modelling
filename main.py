@@ -24,6 +24,7 @@ def main(args):
 	num_epochs = args.epochs
 	trainset_size = args.trainset_size
 	testset_size = args.testset_size
+	only_long_sentences = args.only_long_sentences
 	task=args.task
 	granularity=args.granularity
 	dict={}
@@ -71,6 +72,18 @@ def main(args):
 	if(testset_size and len(testset[0])>testset_size):
 		print(f'Reducing testset size from {len(testset[0])} to {testset_size}')
 		testset = (testset[0][:testset_size], testset[1][:testset_size], testset[2][:testset_size])
+
+	if(only_long_sentences):
+		xs = []
+		ys = []
+		zs = []
+		for x,y,z in trainset:
+			if(len(x) >= 140):
+				xs.append(x)
+				ys.append(y)
+				zs.append(z)
+		print(f'Reducing trainset size from {len(trainset[0])} to {len(xs)} (preserving long sentences)')
+		trainset = (xs, ys, zs)
 
 	if granularity=='char':
 		# charcnn parameters
@@ -405,6 +418,8 @@ if __name__ == '__main__':
 	                    help='bound on the size of trainset, set to 0 if you want no bound')
 	parser.add_argument('--testset_size', type=int, default=0,
 	                    help='bound on the size of testset, set to 0 if you want no bound')
+	parser.add_argument('--only_long_sentences', type=bool, default=True,
+	                    help='train only on long sentences')
 	args = parser.parse_args()
 	print(args)
 	main(args)
