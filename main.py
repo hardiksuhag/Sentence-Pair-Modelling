@@ -326,8 +326,8 @@ def main(args):
 			#print(extra_loss)
 			loss = criterion(output, label)+extra_loss
 			loss.backward()
-			data_loss += loss.data[0]
-			output = np.exp(output.data[0].cpu().numpy())
+			data_loss += loss.data.long()
+			output = np.exp(output.data.long().cpu().numpy())
 			if labels[i][0] == np.argmax(output):
 				train_correct += 1
 			#print(loss-extra_loss)
@@ -355,7 +355,7 @@ def main(args):
 					sentA = test_lsents[test_i]
 					sentB = test_rsents[test_i]
 					output, _ = model(sentA, sentB, index)
-					output = np.exp(output.data[0].cpu().numpy())
+					output = np.exp(output.data.long().cpu().numpy())
 					if test_labels[test_i][0] == np.argmax(output):
 						correct += 1
 					predicted.append(output[1])
