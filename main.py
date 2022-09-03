@@ -77,9 +77,10 @@ def main(args):
 		xs = []
 		ys = []
 		zs = []
+		temp = list(reversed(list(sorted( [len(x) for x in trainset[0]] ))))
+		critical_length = temp[400]
 		for x,y,z in zip(trainset[0], trainset[1], trainset[2]):
-			print(len(x))
-			if(len(x) >= 140):
+			if(len(x) >= critical_length):
 				xs.append(x)
 				ys.append(y)
 				zs.append(z)
