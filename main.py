@@ -289,7 +289,7 @@ def main(args):
 	if torch.cuda.is_available():
 		model=model.cuda()
 	lsents, rsents, labels = trainset
-	criterion = nn.MultiMarginLoss(p=1, margin=1.0, weight=None, reduction='mean')
+	criterion = nn.MultiMarginLoss(p=1, margin=1.0, weight=None, size_average=True)
 	if torch.cuda.is_available():
 		criterion = criterion.cuda()
 	optimizer = torch.optim.RMSprop(model.parameters(), lr=0.0001)#, momentum=0.1, weight_decay=0.05)#,momentum=0.9,weight_decay=0.95)
