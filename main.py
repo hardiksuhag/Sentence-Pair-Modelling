@@ -21,7 +21,7 @@ def main(args):
 	#torch.manual_seed(123)
 	EMBEDDING_DIM = 200
 	HIDDEN_DIM = 250
-	num_epochs = 20
+	num_epochs = args.epochs
 	task=args.task
 	granularity=args.granularity
 	dict={}
@@ -303,6 +303,8 @@ def main(args):
 	report_interval=50000
 	for epoch in range(num_epochs):
 		print('--'*20)
+		print(f'Epoch number {epoch+1}')
+		print('--'*20)
 		model.train()
 		optimizer.zero_grad()
 		start_time = time.time()
@@ -387,6 +389,8 @@ if __name__ == '__main__':
 	                    help='Use multi task language model or not')
 	parser.add_argument('--deep_CNN', type=bool, default=True,
 	                    help='use 19 layer CNN or not')
+	parser.add_argument('--epochs', type=int, default=20,
+	                    help='number of epochs of training')
 	args = parser.parse_args()
 	print(args)
 	main(args)
