@@ -314,8 +314,8 @@ class DeepPairWiseWord(nn.Module):
 		sorted, indices=torch.sort(simCube[6].view(1,-1),descending=True)
 		record=[]
 		for indix in indices[0]:
-			pos1=torch.div(indix,simCube.size(2)).data[0]
-			pos2=(indix-simCube.size(2)*pos1).data[0]
+			pos1=torch.div(indix,simCube.size(2)).data
+			pos2=(indix-simCube.size(2)*pos1).data
 			if s1tag[pos1]+s2tag[pos2]<=0:
 				s1tag[pos1]=1
 				s2tag[pos2]=1
@@ -338,8 +338,8 @@ class DeepPairWiseWord(nn.Module):
 		sorted, indices = torch.sort(simCube[7].view(1, -1), descending=True)
 		counter=0
 		for indix in indices[0]:
-			pos1 = torch.div(indix, simCube.size(2)).data[0]
-			pos2 = (indix-simCube.size(2)*pos1).data[0]
+			pos1 = torch.div(indix, simCube.size(2)).data
+			pos2 = (indix-simCube.size(2)*pos1).data
 			if s1tag[pos1] + s2tag[pos2] <= 0:
 				counter+=1
 				if (pos1,pos2) in record:
