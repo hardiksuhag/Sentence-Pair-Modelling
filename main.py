@@ -22,6 +22,7 @@ def main(args):
 	EMBEDDING_DIM = 200
 	HIDDEN_DIM = 250
 	num_epochs = args.epochs
+	dataset_size = args.dataset_size
 	task=args.task
 	granularity=args.granularity
 	dict={}
@@ -61,6 +62,10 @@ def main(args):
 	else:
 		print('wrong input for the first argument!')
 		sys.exit()
+
+	if(dataset_size and len(trainset[0])>dataset_size):
+		print(f'Reducing dataset size from {len(trainset[0])} to {dataset_size}')
+		trainset = (trainset[0][:dataset_size], trainset[1][:dataset_size], trainset[2][:dataset_size])
 
 	if granularity=='char':
 		# charcnn parameters
@@ -391,6 +396,8 @@ if __name__ == '__main__':
 	                    help='use 19 layer CNN or not')
 	parser.add_argument('--epochs', type=int, default=20,
 	                    help='number of epochs of training')
+	parser.add_argument('--dataset_size', type=int, default=0,
+	                    help='bound on the size of dataset, set to 0 if you want no bound')
 	args = parser.parse_args()
 	print(args)
 	main(args)
