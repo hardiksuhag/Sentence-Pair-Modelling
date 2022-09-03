@@ -316,7 +316,7 @@ class DeepPairWiseWord(nn.Module):
 		for indix in indices[0]:
 			pos1=torch.div(indix,simCube.size(2)).data
 			pos2=(indix-simCube.size(2)*pos1).data
-			if s1tag[pos1]+s2tag[pos2]<=0:
+			if s1tag[pos1.long()]+s2tag[pos2.long()]<=0:
 				s1tag[pos1]=1
 				s2tag[pos2]=1
 				record.append((pos1,pos2))
