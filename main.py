@@ -77,7 +77,7 @@ def main(args):
 		xs = []
 		ys = []
 		zs = []
-		for x,y,z in trainset:
+		for x,y,z in zip(trainset[0], trainset[1], trainset[2]):
 			if(len(x) >= 140):
 				xs.append(x)
 				ys.append(y)
@@ -418,7 +418,7 @@ if __name__ == '__main__':
 	                    help='bound on the size of trainset, set to 0 if you want no bound')
 	parser.add_argument('--testset_size', type=int, default=0,
 	                    help='bound on the size of testset, set to 0 if you want no bound')
-	parser.add_argument('--only_long_sentences', type=bool, default=True,
+	parser.add_argument('--only_long_sentences', type=bool, default=False,
 	                    help='train only on long sentences')
 	args = parser.parse_args()
 	print(args)
