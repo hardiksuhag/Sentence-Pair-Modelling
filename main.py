@@ -22,7 +22,8 @@ def main(args):
 	EMBEDDING_DIM = 200
 	HIDDEN_DIM = 250
 	num_epochs = args.epochs
-	dataset_size = args.dataset_size
+	trainset_size = args.trainset_size
+	testset_size = args.testset_size
 	task=args.task
 	granularity=args.granularity
 	dict={}
@@ -63,9 +64,13 @@ def main(args):
 		print('wrong input for the first argument!')
 		sys.exit()
 
-	if(dataset_size and len(trainset[0])>dataset_size):
-		print(f'Reducing dataset size from {len(trainset[0])} to {dataset_size}')
-		trainset = (trainset[0][:dataset_size], trainset[1][:dataset_size], trainset[2][:dataset_size])
+	if(trainset_size and len(trainset[0])>trainset_size):
+		print(f'Reducing trainset size from {len(trainset[0])} to {trainset_size}')
+		trainset = (trainset[0][:trainset_size], trainset[1][:trainset_size], trainset[2][:trainset_size])
+
+	if(testset_size and len(testset[0])>testset_size):
+		print(f'Reducing testset size from {len(testset[0])} to {testset_size}')
+		testset = (testset[0][:testset_size], testset[1][:testset_size], testset[2][:testset_size])
 
 	if granularity=='char':
 		# charcnn parameters
@@ -359,7 +364,7 @@ def main(args):
 				predicted = []
 				gold = []
 				correct = 0
-				for test_i in range(len(test_lsents)):
+				for test_i in tqdm(range(len(test_lsents))):
 					sentA = test_lsents[test_i]
 					sentB = test_rsents[test_i]
 					output, _ = model(sentA, sentB, index)
@@ -396,8 +401,10 @@ if __name__ == '__main__':
 	                    help='use 19 layer CNN or not')
 	parser.add_argument('--epochs', type=int, default=20,
 	                    help='number of epochs of training')
-	parser.add_argument('--dataset_size', type=int, default=0,
-	                    help='bound on the size of dataset, set to 0 if you want no bound')
+	parser.add_argument('--trainset_size', type=int, default=0,
+	                    help='bound on the size of trainset, set to 0 if you want no bound')
+	parser.add_argument('--testset_size', type=int, default=0,
+	                    help='bound on the size of testset, set to 0 if you want no bound')
 	args = parser.parse_args()
 	print(args)
 	main(args)
