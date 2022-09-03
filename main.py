@@ -297,7 +297,7 @@ def main(args):
 	#optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)
 	# Train the Model
 	#print(oov)
-	print('start training')
+	print(f'start training ({num_epochs} epochs)')
 	max_result=-1
 	batch_size=32
 	report_interval=50000
