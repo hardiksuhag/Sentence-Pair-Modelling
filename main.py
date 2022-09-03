@@ -364,7 +364,7 @@ def main(args):
 				predicted = []
 				gold = []
 				correct = 0
-				for test_i in tqdm(range(len(test_lsents))):
+				for test_i in range(len(test_lsents)):
 					sentA = test_lsents[test_i]
 					sentB = test_rsents[test_i]
 					output, _ = model(sentA, sentB, index)
