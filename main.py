@@ -78,7 +78,7 @@ def main(args):
 		ys = []
 		zs = []
 		for x,y,z in zip(trainset[0], trainset[1], trainset[2]):
-			print(len(x,y,z))
+			print(len(x))
 			if(len(x) >= 140):
 				xs.append(x)
 				ys.append(y)
