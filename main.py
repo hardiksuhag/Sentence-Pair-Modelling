@@ -15,6 +15,7 @@ from model import DeepPairWiseWord
 from util import *
 import argparse
 import os
+from tqdm import tqdm
 
 def main(args):
 	#torch.manual_seed(123)
@@ -309,7 +310,7 @@ def main(args):
 		indices = torch.randperm(len(lsents))
 		train_correct=0
 		#print(len(indices))
-		for index, i in enumerate(indices):
+		for index, i in tqdm(enumerate(indices)):
 			#print(index)
 			#start_time = time.time()
 			sentA = lsents[i]
