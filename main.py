@@ -309,7 +309,7 @@ def main(args):
 		data_loss = 0
 		indices = torch.randperm(len(lsents))
 		train_correct=0
-		#print(len(indices))
+		print(len(indices))
 		for index, i in tqdm(enumerate(indices)):
 			#print(index)
 			#start_time = time.time()
