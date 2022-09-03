@@ -363,7 +363,7 @@ def main(args):
 					sentA = test_lsents[test_i]
 					sentB = test_rsents[test_i]
 					output, _ = model(sentA, sentB, index)
-					output = np.exp(output.data.long().cpu().numpy())
+					output = np.exp(output.data[0].cpu().numpy())
 					if test_labels[test_i][0] == np.argmax(output):
 						correct += 1
 					predicted.append(output[1])
